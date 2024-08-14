@@ -12,10 +12,13 @@ function postOrder(order) {
             "Content-Type": "application/json; charset=utf-8",
         },
     })
-        .then(res => res.json())
-        .then(res => showNotification());
-
-
+        .then(res => {
+            if(res.status == 200) 
+                res.json().then(res => showSuccessNotification());
+            else 
+                res.json().then(error => showFailureNotification(error));
+        })
+        .catch(error => showFailureNotification(error));
 }
 
 /**
@@ -53,10 +56,23 @@ function getOrderData() {
 /**
  * Shows a notification when the order is accepted
  */
-function showNotification() {
-    let orderAlert = $("#order-alert");
+function toggleOrderAlert(orderAlert) {
     orderAlert.toggle();
     setTimeout(() => orderAlert.toggle(), 5000);
+}
+
+function showSuccessNotification() {
+    let orderAlert = $("#order-alert");
+    orderAlert.html('<h4 class="alert-heading">Great!</h4><p>Your order was accepted successfully</p>');
+    orderAlert.attr("class","alert alert-success");
+    toggleOrderAlert(orderAlert);
+}
+
+function showFailureNotification(error) {
+    let orderAlert = $("#order-alert");
+    orderAlert.html(`<h4 class="alert-heading">Error!</h4><p>Your order was rejected due to:</p><h6>${error.error}</h6>`);
+    orderAlert.attr("class","alert alert-danger");
+    toggleOrderAlert(orderAlert);
 }
 
 
