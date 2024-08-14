@@ -18,5 +18,14 @@ fetch(`http://127.0.0.1:5000/order/id/${_id}`)
  */
 function createRowTemplate(order) {
     let template = $("#order-template")[0].innerHTML;
+
+    order["formatDate"] = () => formatDate;
+
     return Mustache.render(template, order);
+}
+
+function formatDate (dateElement, render) {
+    const dateString = render(dateElement).trim();
+    const date = new Date(dateString);
+    return date.toLocaleString();
 }
