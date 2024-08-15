@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+    <!-- Bootstrap CSS -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+      integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="/css/styles.css" />
+
+    <title>L'ultima Cena Pizzeria! - Reports</title>
+  </head>
+
+  <body>
+    <!-- HEADER -->
+
+    <div id="header-section">
+      <template id="header-template">
+        {{>header}}
+      </template>
+    </div>
+
+    <!-- REPORT DATA -->
+
+    <div id="report-title">
+        <template id="report-title-template">
+          <div class="container">
+            <div class="jumbotron">
+              <div>
+                <h2 class="text-center">Report for {{startDate}} to {{endDate}}</h2>
+              </div>
+            </div>
+          </div>  
+        </template>
+    </div>
+
+    <div class="container">
+      <div class="jumbotron">
+        <div id="customer-list">
+          <h2 class="text-center">Revenue by Month</h2>
+          <canvas id="report-revenue-by-month" style="width:100%;max-width:700px"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="jumbotron">
+        <div id="customer-list">
+          <h2 class="text-center">Top Customers</h2>
+          <table id="top-customers" class="table bg-white table-bordered table-hover">
+            <thead class="thead-dark">
+              <tr class="d-flex">
+                <th class="col-3">Name</th>
+                <th class="col-2">DNI</th>
+                <th class="col-3">Address</th>
+                <th class="col-2">Phone</th>
+                <th class="col-2 text-right">Total Purchases</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <template id="report-customer-template">
+      <tr class="d-flex">
+        <td class="col-3">{{client_name}}</td>
+        <td class="col-2">{{client_dni}}</td>
+        <td class="col-3">{{client_address}}</td>
+        <td class="col-2">{{client_phone}}</td>
+        <td class="col-2 text-right">${{#toFixed}}{{client_spending}}{{/toFixed}}</td>
+      </tr>
+    </template>
+
+    <div class="container">
+        <div class="jumbotron">
+          <div id="ingredient-list">
+            <h2 class="text-center">Most Requested Ingredient</h2>
+            <table id="top-ingredients" class="table bg-white table-bordered table-hover">
+              <thead class="thead-dark">
+                <tr class="d-flex">
+                  <th class="col-2">ID</th>
+                  <th class="col-4">Name</th>
+                  <th class="col-3">Price</th>
+                  <th class="col-3 text-right">Purchases</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+  
+      <div class="container">
+        <div class="jumbotron">
+          <div id="beverage-list">
+            <h2 class="text-center">Most Requested Beverage</h2>
+            <table id="top-beverages" class="table bg-white table-bordered table-hover">
+              <thead class="thead-dark">
+                <tr class="d-flex">
+                  <th class="col-2">ID</th>
+                  <th class="col-4">Name</th>
+                  <th class="col-3">Price</th>
+                  <th class="col-3 text-right">Purchases</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <template id="report-order-additional-template">
+        <tr class="d-flex">
+          <td class="col-2">{{_id}}</td>
+          <td class="col-4">{{name}}</td>
+          <td class="col-3">${{#toFixed}}{{price}}{{/toFixed}}</td>
+          <td class="col-3 text-right">{{count}}</td>
+        </tr>
+      </template>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS, then Chart.js -->
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+      integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+      integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/3.0.0/mustache.js"
+      integrity="sha256-ILqMXUXPam8LdBwbq5W6r1m0NxeP8ydLFqrYN+bMCeI="
+      crossorigin="anonymous"
+    ></script>
+    <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
+    </script>
+
+    <script src="/js/templates.js"></script>
+    <script src="/js/report/report-viewer.js"></script>
+  </body>
+</html>

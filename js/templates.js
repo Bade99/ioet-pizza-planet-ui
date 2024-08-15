@@ -28,6 +28,9 @@ function createHeaderTemplate() {
             <li class="nav-item">
             <a class="nav-link" href="/app/size/sizes.html">Sizes</a>
             </li>
+            <li class="nav-item">
+            <a class="nav-link" href="/app/report/reports.html">Reports</a>
+            </li>
         </ul>
         </nav>
     </header>`
