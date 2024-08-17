@@ -1,8 +1,11 @@
-
 function createHeaderTemplate() {
-    let header = $("#header-section");
-    let template = $("#header-template")[0].innerHTML.replace("&gt;", ">");
-    let headerContent = Mustache.render(template, {}, {"header":
+  let header = $("#header-section");
+  let template = $("#header-template")[0].innerHTML.replace("&gt;", ">");
+  let headerContent = Mustache.render(
+    template,
+    {},
+    {
+      header: 
     `<header class="header-section container-fluid">
         <nav class="navbar navbar-expand navbar-dark bg-dark">
         <a class="navbar-brand" href="/">
@@ -33,9 +36,28 @@ function createHeaderTemplate() {
             </li>
         </ul>
         </nav>
-    </header>`
-    });
-    header.html(headerContent);
+    </header>`,
+    }
+  );
+  header.html(headerContent);
 }
 
-window.addEventListener("load", createHeaderTemplate, false);
+function createNotificationTemplate() {
+  let notification = $("#notification-section");
+  let template = $("#notification-template")[0].innerHTML.replace("&gt;", ">");
+  let notificationContent = Mustache.render(
+    template,
+    {},
+    {
+      notification: '<div id="notification-alert" role="alert"></div>'
+    }
+  );
+  notification.html(notificationContent);
+}
+
+function createTemplates() {
+    createHeaderTemplate();
+    createNotificationTemplate();
+}
+
+window.addEventListener("load", createTemplates, false);

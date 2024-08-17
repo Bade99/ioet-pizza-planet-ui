@@ -31,7 +31,11 @@
     <div class="container">
       <!-- Notification Area -->
 
-      <div id="order-alert" role="alert"></div>
+      <div id="notification-section">
+        <template id="notification-template">
+          {{>notification}}
+        </template>
+      </div>
 
       <div class="jumbotron">
         <h2 class="text-center">Build your own pizza!</h2>
@@ -153,6 +157,7 @@
     ></script>
 
     <script src="js/templates.js"></script>
+    <script src="js/notifications.js"></script>
     <script src="js/index.js"></script>
   </body>
 </html>
